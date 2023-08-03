@@ -122,21 +122,22 @@ int main(int argc, char *argv[])
         return 1;
     }
 
-    const uint32_t flags[4] = {
-        DCS_ADDRESS_MODE_BGR_COLOR,
-        0,
-        DCS_ADDRESS_MODE_H_FLIP | DCS_ADDRESS_MODE_V_FLIP,
-        DCS_ADDRESS_MODE_H_FLIP,
-    };
-    uint32_t ctr = 0;
+    // const uint32_t flags[4] = {
+    //     DCS_ADDRESS_MODE_BGR_COLOR,
+    //     0,
+    //     DCS_ADDRESS_MODE_H_FLIP | DCS_ADDRESS_MODE_V_FLIP,
+    //     DCS_ADDRESS_MODE_H_FLIP,
+    // };
+    // uint32_t ctr = 0;
 
     while (true)
     {
         dsi_send_cmd(MIPI_DSI_DCS_SHORT_WRITE_PARAM,
-                     MIPI_DCS_SET_ADDRESS_MODE | ((flags[ctr++ % 4]) << 8),
+                     //  MIPI_DCS_SET_ADDRESS_MODE | ((flags[ctr++ % 4]) << 8),
+                     MIPI_DCS_SET_ADDRESS_MODE | ((DCS_ADDRESS_MODE_V_FLIP) << 8),
                      20000);
 
-        svcSleepThread(1000000000L);
+        svcSleepThread(100000000L);
     }
     return 0;
 }
